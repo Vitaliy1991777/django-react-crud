@@ -21,8 +21,13 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.shortcuts import redirect
+
+def redirect_to_admin(request):
+    return redirect('/admin/')
 
 urlpatterns = [
+    path('', redirect_to_admin),
     path('admin/', admin.site.urls),
     path('api/', include('main.urls')),  # Ваши API маршруты
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
